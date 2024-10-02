@@ -11,13 +11,13 @@ import { ArrowUpDown, ChevronDown } from "lucide-react"
 
 export function TradingInterfaceComponent() {
   return (
-    <div className="min-h-screen bg-gray-950 text-white p-4">
+    <div className="min-h-screen bg-zinc-950 text-white p-4">
       <header className="flex justify-between items-center mb-4">
         <div className="flex items-center space-x-2">
-          <div className="w-8 h-8 bg-white rounded-full"></div>
-          <span className="text-xl font-bold">APTURES</span>
+          <div className="w-8 h-8 bg-white rounded-full"></div> 
+          <span className="text-xl font-bold">APTOS</span>
         </div>
-        <Button variant="default" className="bg-emerald-500 hover:bg-emerald-600">Connect</Button>
+        <Button variant="default" className="bg-zinc-900 hover:bg-zinc-800">Connect</Button>
       </header>
 
       <div className="grid grid-cols-3 gap-4">
