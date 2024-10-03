@@ -1,0 +1,11 @@
+[package]
+name = "raffle"
+version = "0.0.1"
+
+[dependencies]
+AptosFramework = { local = "../../framework/aptos-framework" }
+AptosStdlib = { local = "../../framework/aptos-stdlib" }
+
+[addresses]
+future = "_"
+admin_addr = "0xbeef"
