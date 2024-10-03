@@ -126,12 +126,11 @@ const BuyButton: React.FC<BuyButtonProps> = ({ stock }) => {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button variant="outline">Buy</Button>
+        <Button variant="outline" className="w-[100px] ">Extend</Button>
       </PopoverTrigger>
-      <PopoverContent>
+      <PopoverContent className="dark">
         <div className="flex flex-col space-y-2 p-2">
           <Input
-            type="number"
             placeholder="Number of Stocks"
             value={numStocks}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -139,7 +138,6 @@ const BuyButton: React.FC<BuyButtonProps> = ({ stock }) => {
             }
           />
           <Input
-            type="number"
             placeholder="Number of Days"
             value={numDays}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>

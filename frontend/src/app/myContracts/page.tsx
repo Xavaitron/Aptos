@@ -1,9 +1,16 @@
 import * as React from "react"
-import { Button } from "@/components/ui/button"
-import StockList from "./ui/stock-list"
-import { StockData } from "./ui/stock-list"
+import Link from "next/link"
+import {
+  NavigationMenu,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+} from "@/components/ui/navigation-menu"
 
-export function TradingInterfaceComponent() {
+import { Button } from "@/components/ui/button"
+import StockList, { StockData } from "@/components/stock-user-list"
+
+export default function Home() {
   const data: StockData[] = [
     {
       symbol: "AAPL",
@@ -97,17 +104,26 @@ export function TradingInterfaceComponent() {
           <div className="w-8 h-8 bg-white rounded-full"></div>
           <span className="text-xl font-bold">APTOS</span>
         </div>
-        <div className="flex items-center space-x-2">
-          <Button variant="ghost" className="">Connect</Button>
+        <div className="flex items-center space-x-6">
+          <NavigationMenu>
+            <NavigationMenuList>
+              <NavigationMenuItem>
+                <Link href="/" legacyBehavior passHref>
+                  <NavigationMenuLink>
+                    Home
+                  </NavigationMenuLink>
+                </Link>
+              </NavigationMenuItem>
+            </NavigationMenuList>
+          </NavigationMenu>
           <Button variant="default" className="w-[150px]">Connect</Button>
         </div>
       </header>
 
       <main className="flex flex-col justify-between items-center lg:flex-row">
-        <div className="w-full md:w-1/2 mx-2">
+        <div className="w-full mx-2">
           <StockList data={data} />
         </div>
-        <div className="w-full md:w-1/2 m-4 bg-blue-500">Hello</div>
       </main>
     </div>
   )
