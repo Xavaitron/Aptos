@@ -1,6 +1,7 @@
 import * as React from "react"
 import Link from "next/link"
 import { Chart } from "@/components/chart-interface"
+import { OrderBook } from "@/components/order-book-interface"
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -122,11 +123,12 @@ export default function Home() {
       </header>
 
       <main className="flex flex-col justify-between items-center lg:flex-row">
-        <div className="w-full md:w-1/2 mx-2">
+        <div className="w-full mx-2">
           <StockList data={data} />
         </div>
-        <div className="w-full md:w-1/2 mx-2">
+        <div className="w-full mx-2">
           <Chart/>
+          <OrderBook/>
         </div>
       </main>
     </div>

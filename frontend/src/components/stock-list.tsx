@@ -32,6 +32,7 @@ import {
   DropdownMenuCheckboxItem,
 } from "@/components/ui/dropdown-menu"
 import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover"
+import { Label } from "./ui/label"
 
 // Define the StockData type
 export type StockData = {
@@ -130,6 +131,7 @@ const BuyButton: React.FC<BuyButtonProps> = ({ stock }) => {
       </PopoverTrigger>
       <PopoverContent className="dark">
         <div className="flex flex-col space-y-2 p-2">
+          <Label>Number of Stocks</Label>
           <Input
             placeholder="Number of Stocks"
             value={numStocks}
@@ -137,6 +139,7 @@ const BuyButton: React.FC<BuyButtonProps> = ({ stock }) => {
               setNumStocks(Number(e.target.value))
             }
           />
+          <Label>Number of Days</Label>
           <Input
             placeholder="Number of Days"
             value={numDays}
@@ -203,7 +206,7 @@ export default function StockList({ data }: StockListProps) {
               Columns <ChevronDownIcon className="ml-2 h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
+          <DropdownMenuContent align="end" className="dark">
             {table
               .getAllColumns()
               .filter((column) => column.getCanHide())

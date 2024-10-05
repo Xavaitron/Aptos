@@ -1,88 +1,68 @@
 import {
-    Table,
-    TableBody,
-    TableCaption,
-    TableCell,
-    TableFooter,
-    TableHead,
-    TableHeader,
-    TableRow,
-  } from "@/components/ui/table"
-  
-  const invoices = [
-    {
-      invoice: "INV001",
-      paymentStatus: "Paid",
-      totalAmount: "$250.00",
-      paymentMethod: "Credit Card",
-    },
-    {
-      invoice: "INV002",
-      paymentStatus: "Pending",
-      totalAmount: "$150.00",
-      paymentMethod: "PayPal",
-    },
-    {
-      invoice: "INV003",
-      paymentStatus: "Unpaid",
-      totalAmount: "$350.00",
-      paymentMethod: "Bank Transfer",
-    },
-    {
-      invoice: "INV004",
-      paymentStatus: "Paid",
-      totalAmount: "$450.00",
-      paymentMethod: "Credit Card",
-    },
-    {
-      invoice: "INV005",
-      paymentStatus: "Paid",
-      totalAmount: "$550.00",
-      paymentMethod: "PayPal",
-    },
-    {
-      invoice: "INV006",
-      paymentStatus: "Pending",
-      totalAmount: "$200.00",
-      paymentMethod: "Bank Transfer",
-    },
-    {
-      invoice: "INV007",
-      paymentStatus: "Unpaid",
-      totalAmount: "$300.00",
-      paymentMethod: "Credit Card",
-    },
-  ]
-  
-  export function TableDemo() {
-    return (
-      <Table>
-        <TableCaption>A list of your recent invoices.</TableCaption>
-        <TableHeader>
-          <TableRow>
-            <TableHead className="w-[100px]">Invoice</TableHead>
-            <TableHead>Status</TableHead>
-            <TableHead>Method</TableHead>
-            <TableHead className="text-right">Amount</TableHead>
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
+
+type OrderBookLevel = {
+  bidQuantity: number | string
+  bidPrice: number | string
+  askPrice: number | string
+  askQuantity: number | string
+}
+
+const bids = [
+  { price: 99.95, quantity: 10 },
+  { price: 99.9, quantity: 7 },
+  { price: 99.85, quantity: 12 },
+  { price: 99.8, quantity: 15 },
+]
+
+const asks = [
+  { price: 100.05, quantity: 8 },
+  { price: 100.1, quantity: 12 },
+  { price: 100.15, quantity: 9 },
+  { price: 100.2, quantity: 14 },
+]
+
+const maxLevels = Math.max(bids.length, asks.length)
+const orderBookLevels: OrderBookLevel[] = []
+
+for (let i = 0; i < maxLevels; i++) {
+  orderBookLevels.push({
+    bidQuantity: bids[i]?.quantity ?? "",
+    bidPrice: bids[i]?.price ?? "",
+    askPrice: asks[i]?.price ?? "",
+    askQuantity: asks[i]?.quantity ?? "",
+  })
+}
+
+export function OrderBook() {
+  return (
+    <Table>
+      <TableCaption>Order Book for Futures Contract XYZ</TableCaption>
+      <TableHeader>
+        <TableRow>
+          <TableHead>Bid Quantity</TableHead>
+          <TableHead>Bid Price</TableHead>
+          <TableHead>Ask Price</TableHead>
+          <TableHead>Ask Quantity</TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {orderBookLevels.map((level, index) => (
+          <TableRow key={index}>
+            <TableCell>{level.bidQuantity}</TableCell>
+            <TableCell>{level.bidPrice}</TableCell>
+            <TableCell>{level.askPrice}</TableCell>
+            <TableCell>{level.askQuantity}</TableCell>
           </TableRow>
-        </TableHeader>
-        <TableBody>
-          {invoices.map((invoice) => (
-            <TableRow key={invoice.invoice}>
-              <TableCell className="font-medium">{invoice.invoice}</TableCell>
-              <TableCell>{invoice.paymentStatus}</TableCell>
-              <TableCell>{invoice.paymentMethod}</TableCell>
-              <TableCell className="text-right">{invoice.totalAmount}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-        <TableFooter>
-          <TableRow>
-            <TableCell colSpan={3}>Total</TableCell>
-            <TableCell className="text-right">$2,500.00</TableCell>
-          </TableRow>
-        </TableFooter>
-      </Table>
-    )
-  }
-  
+        ))}
+      </TableBody>
+    </Table>
+  )
+}
