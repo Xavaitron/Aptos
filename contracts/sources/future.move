@@ -46,7 +46,7 @@ module 0xccc::future {
         let k= &mut borrow_global_mut<Container<u64>>(addr).t;
         *k=v;
     }
-    fun getStockVal(addr: address,id:u64): u64 acquires Container{
+    public fun getStockVal(addr: address,id:u64): u64 acquires Container{
         (*vector::borrow(&borrow_global_mut<Container<vector<Stock>>>(addr).t,id)).val
     }
     fun setStockVal(addr:address,sid:u64,val:u64) acquires Container{
