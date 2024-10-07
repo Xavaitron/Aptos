@@ -1,3 +1,5 @@
+"use client"
+
 import * as React from "react"
 import Link from "next/link"
 import { Chart } from "@/components/chart-interface"
@@ -11,6 +13,10 @@ import {
 
 import { Button } from "@/components/ui/button"
 import StockList, { StockData } from "@/components/stock-list"
+
+
+
+
 
 export default function Home() {
   const data: StockData[] = [
@@ -99,6 +105,10 @@ export default function Home() {
       priceChange: +0.85,
     },
   ]
+
+  const [selectedStock, setSelectedStock] = React.useState<StockData | null>(null)
+
+
   return (
     <div className="min-h-screen bg-zinc-950 text-white p-4">
       <header className="flex justify-between items-center mb-4">
@@ -122,13 +132,19 @@ export default function Home() {
         </div>
       </header>
 
-      <main className="flex flex-col justify-between items-center lg:flex-row">
+      <main className="flex flex-col justify-between items-center lg:flex-row ">
         <div className="w-full mx-2">
-          <StockList data={data} />
+          <StockList data={data} onStockSelect={setSelectedStock} />
         </div>
         <div className="w-full mx-2">
-          <Chart/>
-          <OrderBook/>
+          {selectedStock ? (
+            <>
+              <Chart stock={selectedStock} />
+              <OrderBook stock={selectedStock} />
+            </>
+          ) : (
+            <div className="text-center">Please select a stock to view details.</div>
+          )}
         </div>
       </main>
     </div>

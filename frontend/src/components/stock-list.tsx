@@ -68,9 +68,8 @@ export const columns: ColumnDef<StockData>[] = [
 
       return (
         <div
-          className={`text-right font-medium ${
-            priceChange >= 0 ? "text-green-500" : "text-red-500"
-          }`}
+          className={`text-right font-medium ${priceChange >= 0 ? "text-green-500" : "text-red-500"
+            }`}
         >
           ${formattedPrice}
         </div>
@@ -114,12 +113,11 @@ type BuyButtonProps = {
 
 const BuyButton: React.FC<BuyButtonProps> = ({ stock }) => {
   const [numStocks, setNumStocks] = React.useState<number>(0)
-  const [numDays, setNumDays] = React.useState<number>(0)
 
   const handleConfirm = () => {
     // Handle the transaction confirmation logic
     console.log(
-      `Buying ${numStocks} shares of ${stock.symbol} for ${numDays} days`
+      `Buying ${numStocks} shares of ${stock.symbol} for 24 hrs`
     )
     // Add your transaction logic here
   }
@@ -139,14 +137,6 @@ const BuyButton: React.FC<BuyButtonProps> = ({ stock }) => {
               setNumStocks(Number(e.target.value))
             }
           />
-          <Label>Number of Days</Label>
-          <Input
-            placeholder="Number of Days"
-            value={numDays}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setNumDays(Number(e.target.value))
-            }
-          />
           <Button onClick={handleConfirm}>Confirm Transaction</Button>
         </div>
       </PopoverContent>
@@ -156,9 +146,10 @@ const BuyButton: React.FC<BuyButtonProps> = ({ stock }) => {
 
 type StockListProps = {
   data: StockData[]
+  onStockSelect: (stock: StockData) => void
 }
 
-export default function StockList({ data }: StockListProps) {
+export default function StockList({ data, onStockSelect }: StockListProps) {
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
@@ -238,9 +229,9 @@ export default function StockList({ data }: StockListProps) {
                       {header.isPlaceholder
                         ? null
                         : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
                     </TableHead>
                   )
                 })}
@@ -250,9 +241,12 @@ export default function StockList({ data }: StockListProps) {
           <TableBody>
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
-                <TableRow key={row.id}>
+                <TableRow
+                  key={row.id}
+                  onClick={() => onStockSelect(row.original)}
+                  className="cursor-pointer">
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
+                    <TableCell key={cell.id} >
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()
