@@ -26,7 +26,7 @@ type ChartProps = {
 
 export function Chart({ stock }: ChartProps) {
   // Generate chart data based on the selected stock
-  const chartData = generateChartData(stock)
+  const chartData = generateChartData()
 
   const chartConfig = {
     views: {
@@ -98,7 +98,7 @@ export function Chart({ stock }: ChartProps) {
 }
 
 // Mock function to generate chart data based on the selected stock
-function generateChartData(stock: StockData) {
+function generateChartData() {
   // Replace this with actual data fetching logic
   // For demonstration, we'll create random data points
 
@@ -109,7 +109,7 @@ function generateChartData(stock: StockData) {
     date.setDate(currentDate.getDate() - i)
     data.push({
       date: date.toISOString().split('T')[0],
-      price: (stock.price + Math.random() * 5000 - 5).toFixed(2),
+      price: ( Math.random() * 100).toFixed(2),
     })
   }
   // Reverse the data array to have the oldest date first
