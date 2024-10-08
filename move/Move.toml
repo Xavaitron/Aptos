@@ -8,4 +8,4 @@ AptosStdlib = { local = "../../framework/aptos-stdlib" }
 
 [addresses]
 future = "_"
-admin_addr = "0xbeef"
+admin_addr = "0x46c296bd3c1eb6c8b858cc459ed7d6a3d4e664216683b834a9381c176d87c369"
