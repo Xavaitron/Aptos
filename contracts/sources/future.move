@@ -125,7 +125,7 @@ module 0xccc::future {
             futuresAffectedSize:0});
         let k= &mut borrow_global_mut<Container<u128>>(ad).t;
         *k=*k+1;
-        return *k
+        return *k-1
     }
     public fun min(a:u64,b:u64):u64{
         if(a>b){return b}
