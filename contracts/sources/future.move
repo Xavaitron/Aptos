@@ -26,6 +26,7 @@ module 0xccc::future {
         let stocks=vector::empty<Stock>();
         let stockDependents:SimpleMap<u64,vector<u64>> = simple_map::create();
         let size:u64=0;
+        move_to<Container<u128>>(account, Container<u128> { t:0 });
         move_to<Container<u64>>(account, Container<u64> { t:size });
         move_to<Container<vector<Stock>>>(account, Container<vector<Stock>> { t:stocks });
         move_to<Container<SimpleMap<u64,Future>>>(account, Container<SimpleMap<u64,Future>> { t:contracts });
@@ -113,8 +114,18 @@ module 0xccc::future {
             it=it+1;
         }
     }
-    public fun addStock(){
-        
+    public fun addStock(sign:&signer,val:u64,total:u64):u128 acquires Container{
+        let ad =signer::address_of(sign);
+        vector::push_back(&mut borrow_global_mut<Container<vector<Stock>>>(ad).t,
+        Stock{
+            total:total,
+            bonded:0, 
+            val:val,
+            futuresAffected:vector::empty<u64>(),
+            futuresAffectedSize:0});
+        let k= &mut borrow_global_mut<Container<u128>>(ad).t;
+        *k=*k+1;
+        return *k
     }
     public fun min(a:u64,b:u64):u64{
         if(a>b){return b}
