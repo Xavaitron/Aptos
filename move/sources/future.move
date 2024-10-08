@@ -1,4 +1,4 @@
-module 0xccc::future {
+module 46c296bd3c1eb6c8b858cc459ed7d6a3d4e664216683b834a9381c176d87c369::future {
     use aptos_framework::aptos_coin::AptosCoin;
     use aptos_framework::coin;
     use aptos_framework::timestamp;
